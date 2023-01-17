@@ -35,6 +35,7 @@ export default {
         this.groupList = response?.data?.data?.groupList;
         this.countList = response?.data?.data?.countList;
 
+        // 기본셋팅
         this.groupList.forEach((obj, index) => {
           obj.index = index;
           obj.disabled = index ? true : false;
@@ -45,6 +46,7 @@ export default {
         console.log(error);
       })
     },
+    // 옵션 선택에 따른 다음 옵션 수량 계산
     calcRemainCount(op, idx) {
 
       let text = '';
@@ -61,10 +63,14 @@ export default {
 
       return text;
     },
+    // 옵션 선택에 따른 각 selectBox 비활성화
     selectChange(idx) {
+
       if (idx < this.groupList.length - 1) {
+
         this.selectedOption.fill('', idx + 1);
         this.groupList[++idx].disabled = false;
+        
         while (++idx < this.groupList.length) {
           this.groupList[idx].disabled = true;
         }
